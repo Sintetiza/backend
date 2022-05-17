@@ -1,6 +1,9 @@
 import { createServer } from "http";
 import { once } from "events";
 import { randomUUID } from "crypto";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const Database = new Map();
 
