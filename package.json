@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "npx node src/index.js",
+    "start": "npx node src/index.js",
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest --watchAll",
     "migrateDev": "prisma migrate dev"
   },
