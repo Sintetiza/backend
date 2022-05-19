@@ -36,9 +36,37 @@ export const routes = {
       // resetPassword()
     },
   },
-  "/getresumos": {
+  "/resumos": {
+    POST: () => {
+      // createResumo()
+    },
     GET: () => {
-      // getResumos()
+      // getResumoComments()
+    },
+  },
+  "/resumos/:id": {
+    GET: () => {
+      // getResumo()
+    },
+    DELETE: () => {
+      // deleteResumo()
+    },
+    UPDATE: () => {
+      // updateResumo()
+    },
+  },
+  "/resumos/:id/comments": {
+    GET: () => {
+      // getResumoComments()
+    },
+    POST: () => {
+      // createResumoComment()
+    },
+    DELETE: () => {
+      // deleteResumoComment()
+    },
+    UPDATE: () => {
+      // updateResumoComment()
     },
   },
 };
