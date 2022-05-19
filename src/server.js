@@ -1,51 +1,26 @@
-import { createServer } from "http";
-import { once } from "events";
-import { randomUUID } from "crypto";
-import { PrismaClient } from "@prisma/client";
-import { routes } from "./routes.js";
+import express from "express";
+import "dotenv/config";
+import http from "http";
+import cors from "cors";
 
-const prisma = new PrismaClient();
+import { router } from "./routes.js";
+import { Server } from "socket.io";
 
-const Database = new Map();
+const app = express();
+app.use(cors());
 
-function respondJSON(data, response) {
-  return response.end(JSON.stringify(data));
-}
+const serverHttp = http.createServer(app);
+const io = new Server(serverHttp, {
+  cors: {
+    origin: "*",
+  },
+});
 
-async function handler(request, response) {
-  const { url, method } = request;
-  if (routes[url]) {
-    const route = routes[url];
-    if (route[method]) {
-      const data = await route[method](request, response);
-      respondJSON(data, response);
-      return;
-    }
+io.on("connection", (socket) => {
+  console.log(`New client connected ${socket.id}`);
+});
 
-    response.statusCode = 405;
-    response.end(`Method ${method} not allowed`);
-    return;
-  }
-  response.statusCode = 404;
-  response.end(`Route ${url} not found`);
-}
-//   routes[url] && routes[url][method] && routes[url][method](request, response);
-//   if (method === "GET") {
-//     return respondJSON([...Database.values()], response);
-//   }
+app.use(express.json());
+app.use(router);
 
-//   if (method === "POST") {
-//     const body = await once(request, "data");
-//     const id = randomUUID();
-//     const data = JSON.parse(body);
-//     Database.set(id, data);
-//     return respondJSON({ ok: 1 }, response);
-//   }
-
-//   if (method === "DELETE") {
-//     Database.clear();
-//     return respondJSON({ ok: 1 }, response);
-//   }
-// }
-
-export default createServer(handler);
+export { serverHttp };

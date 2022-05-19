@@ -1,80 +1,36 @@
+import { Router } from "express";
+
 import { AuthenticateUserController } from "./controllers/AuthenticateUserController.js";
 
-export const routes = {
-  "/": {
-    GET: (req, res) => {
-      home(req, res);
-    },
-  },
-  "/login": {
-    POST: () => {
-      home(req, res);
-    },
-  },
-  "/profile": {
-    GET: (req, res) => {
-      home(req, res);
-    },
-  },
-  "/logout": {
-    GET: (req, res) => {
-      home(req, res);
-    },
-  },
-  "/register": {
-    POST: () => {
-      // register()
-    },
-  },
-  "/forgot-password": {
-    POST: () => {
-      // forgotPassword()
-    },
-  },
-  "/reset-password": {
-    POST: () => {
-      // resetPassword()
-    },
-  },
-  "/resumos": {
-    POST: () => {
-      // createResumo()
-    },
-    GET: () => {
-      // getResumoComments()
-    },
-  },
-  "/resumos/:id": {
-    GET: () => {
-      // getResumo()
-    },
-    DELETE: () => {
-      // deleteResumo()
-    },
-    UPDATE: () => {
-      // updateResumo()
-    },
-  },
-  "/resumos/:id/comments": {
-    GET: () => {
-      // getResumoComments()
-    },
-    POST: () => {
-      // createResumoComment()
-    },
-    DELETE: () => {
-      // deleteResumoComment()
-    },
-    UPDATE: () => {
-      // updateResumoComment()
-    },
-  },
-};
+const router = Router();
+router.get("/", (request, response) => {
+  response.json({
+    message: "Hello World",
+  });
+});
+router.post("/authenticate", new AuthenticateUserController().handle);
+// router.get("/profile", ensureAuthenticated, new ProfileUserController().handle);
+// router.get("/logout", new LogoutUserController().handle);
+// router.post("/register", new RegisterUserController().handle);
+// router.post("/forgot-password", new ForgotPasswordUserController().handle);
+// router.post("/reset-password", new ResetPasswordUserController().handle);
+// router.post("/resumos", new CreateResumoController().handle);
+// router.get("/resumos", new GetResumosController().handle);
+// router.get("/resumos/:id", new GetResumoController().handle);
+// router.delete("/resumos/:id", new DeleteResumoController().handle);
+// router.put("/resumos/:id", new UpdateResumoController().handle);
+// router.get("/resumos/:id/comments", new GetResumoCommentsController().handle);
+// router.post(
+//   "/resumos/:id/comments",
+//   new CreateResumoCommentController().handle
+// );
+// router.delete(
+//   "/resumos/:id/comments/:id",
+//   new DeleteResumoCommentController().handle
+// );
+// router.put(
+//   "/resumos/:id/comments/:id",
+//   new UpdateResumoCommentController().handle
+// );
 
-function home(req, res) {
-  res.setHeader("Content-Type", "text/html");
-  res.end(`
-    <h1>Hello World</h1>
-    <p>This is a simple example of a Node.js web server.</p>
-  `);
-}
+export { router };
