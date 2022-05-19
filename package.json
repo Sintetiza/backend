@@ -22,6 +22,7 @@
     "supertest": "^6.2.2"
   },
   "dependencies": {
-    "@prisma/client": "^3.14.0"
+    "@prisma/client": "^3.14.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }
