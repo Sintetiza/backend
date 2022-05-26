@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { AuthenticateUserController } from "./controllers/AuthenticateUserController.js";
+import { UserController } from "./controllers/UserController.js";
 
 const router = Router();
 router.get("/", (request, response) => {
@@ -8,6 +8,10 @@ router.get("/", (request, response) => {
     message: "Hello World",
   });
 });
+
+// CRUD USER
+router.get;
+
 router.post("/authenticate", new AuthenticateUserController().handle);
 // router.get("/profile", ensureAuthenticated, new ProfileUserController().handle);
 // router.get("/logout", new LogoutUserController().handle);
